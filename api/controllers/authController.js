@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
+const errorHandler = require("../utils/error");
 const signUp = async (req, res) => {
   const { username, email, password } = req.body;
   const hashedPass = await bcrypt.hash(password, 10);
