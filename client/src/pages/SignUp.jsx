@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [error, seterror] = useState(null);
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
@@ -24,12 +25,18 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      if (data.success === false) {
+        setLoading(false);
+        seterror(data.message);
+        console.log(error);
+        return;
+      }
       setLoading(false);
       console.log(data);
       navigate("/sign-in");
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      seterror(error);
     }
   };
 
@@ -78,6 +85,7 @@ const SignUp = () => {
           <span className="text-blue-700">Sign In</span>
         </Link>
       </div>
+      {error && <p className="text-red-500 mt-5">{error}</p>}
     </div>
   );
 };

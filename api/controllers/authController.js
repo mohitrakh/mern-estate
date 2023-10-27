@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const errorHandler = require("../utils/error");
-const signUp = async (req, res) => {
+const signUp = async (req, res, next) => {
   const { username, email, password } = req.body;
   const hashedPass = await bcrypt.hash(password, 10);
 
@@ -11,10 +11,11 @@ const signUp = async (req, res) => {
       msg: "user created",
     });
   } catch (error) {
-    res.status(500).json({
-      msg: "invalid",
-      error: error,
-    });
+    next(error);
+    // res.status(500).json({
+    //   msg: "invalid",
+    //   error: error,
+    // });
   }
 };
 
