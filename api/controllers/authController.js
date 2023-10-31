@@ -10,6 +10,7 @@ const signUp = async (req, res, next) => {
     const user = await User.create({ username, email, password: hashedPass });
     res.status(201).json({
       msg: "user created",
+      user,
     });
   } catch (error) {
     next(error);

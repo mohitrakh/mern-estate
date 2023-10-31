@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoute");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ mongoose
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.listen(3000, () => {
   console.log("server is listening on 3000!!");
