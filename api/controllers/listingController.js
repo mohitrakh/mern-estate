@@ -9,4 +9,12 @@ const createListing = async (req, res, next) => {
   }
 };
 
-module.exports = { createListing };
+const deleteListing = async (req, res, next) => {
+  try {
+    await Listing.findByIdAndDelete({ _id: req.params.id });
+    res.status(200).json({ msg: "deleted" });
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = { createListing, deleteListing };

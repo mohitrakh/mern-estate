@@ -66,7 +66,6 @@ export default function Profile() {
     );
   };
 
-  console.log(currentUser);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
